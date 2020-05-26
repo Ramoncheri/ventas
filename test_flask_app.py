@@ -6,7 +6,7 @@ class TestWeb(TestFlaskBase):  #se lanza create app
         resp= self.client.get('/')
         self.assertEqual(resp.status_code, 200)
         
-   def test_route_index_HolaMundo(self):
+   def test_route_index_listaregiones(self):
         resp= self.client.get('/')
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.data, b'Hola mundo')
