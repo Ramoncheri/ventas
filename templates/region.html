@@ -2,34 +2,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global S.L.    </title>
+    <title> {{titulo}}   </title>
 </head>
 <body>
+    <header>
+        {{titulo}}
+    </header>
     <h1>Ventas por región</h1>
     <table>
         <tr>
-        <th>Region</th>
-        <th>Ventas</th>
-        <th>Beneficios</th>
+            <th>Region</th>
+            <th>Ventas</th>
+            <th>Beneficios</th>
         </tr>
+        {% for region, data in ventas.items() %}
         <tr>
-            <td>Australia y Oceania</td>
-            <td>120000</td>
-            <td>350000</td>
+            <td>{{region}}</td>
+            <td>{{data.ingresos}}</td>
+            <td>{{data.beneficios}}</td>
         </tr>
-        <tr>
-            <td>Europa</td>
-            <td>120000</td>
-            <td>350000</td>
-            <tr>
-            <td>Central America</td>
-            <td>120000</td>
-            <td>350000</td>
-            <tr>
-            <td>Sub Saharian</td>
-             <td>120000</td>
-            <td>350000</td>
-        </tr>
+        {% endfor %}
+       
     </table>
+    <footer>
+        &copy; 2020 - Todos los derechos reservados
+    </footer>
 </body>
 </html>
