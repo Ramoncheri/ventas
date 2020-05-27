@@ -3,6 +3,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> {{titulo}}   </title>
+<link rel="stylesheet" href="/static/styles.css">
+<style>
+    
+</style>
+
 </head>
 <body>
     <header>
@@ -17,9 +22,9 @@
         </tr>
         {% for region, data in ventas.items() %}
         <tr>
-            <td>{{region}}</td>
-            <td>{{data.ingresos}}</td>
-            <td>{{data.beneficios}}</td>
+            <td class='region'>{{region}}</td>
+            <td class='cifra'>{{data.ingresos}}</td>
+            <td class='cifra'>{{data.beneficios}}</td>
         </tr>
         {% endfor %}
        

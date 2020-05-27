@@ -1,0 +1,30 @@
+*{
+    padding: 0;
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    }
+    header, footer{
+        padding:  10px;
+        background-color: #B8D0EB;
+    }
+    table{
+        width: 80%;
+        margin: 10px auto;
+        border: 1px solid #B8D0EB
+    }
+    td, th{
+        border: 1px solid #B8D0EB;
+        padding: 2px;
+    }
+    th {
+        background-color: #B8D0EB;
+        color: white;
+    }
+    .region {
+        font-weight: bold;
+        color: #020402;
+        text-align: center;
+    }
+    .cifra {
+        text-align: right;
+    }
