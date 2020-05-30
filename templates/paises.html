@@ -1,27 +1,30 @@
 {% extends 'base.html' %}  #instruccion que dice que region es una extension de base.html
 
 {%block titulo%}
-Ventas por región
+Ventas por país
 {% endblock%}
 
 {% block contenido %}
-
-    <h1>Ventas por región</h1>
+    
+    
+    
+    
+    <h1>Ventas por pais</h1>
+    <h2>Región: {{request.values['region']}}</h2>
     <table>
         <tr>
-            <th>Region</th>
+            <th>Pais</th>
             <th>Ventas</th>
             <th>Beneficios</th>
         </tr>
-        {% for region, data in ventas.items() %}
+        {% for pais, data in ventas.items() %}
         <tr>
-            <td class='region'>{{region}}</td>
+            <td class='region'>{{pais}}</td>
             <td class='cifra'>{{data.ingresos | round(2, 'floor')}} €</td>
             <td class='cifra'>{{data.beneficios | round(2, 'floor')}} €</td>
         </tr>
         {% endfor %}
        
     </table>
-
     {% endblock %}
- 
+    

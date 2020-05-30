@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    fVentas= open('sales10.csv','r')
+    fVentas= open('sales.csv','r')
     csvReader=csv.reader(fVentas,delimiter = ',')
 
     
@@ -32,7 +32,7 @@ def index():
 def paises():
     region_name= request.values['region']  #request.value es un atributo del metodo request de Flask
 
-    fVentas= open('sales10.csv','r')
+    fVentas= open('sales.csv','r')
     csvReader=csv.reader(fVentas,delimiter = ',')
     d= {}
     for linea in csvReader:
@@ -42,4 +42,5 @@ def paises():
                 d[linea[1]]['beneficios'] += float(linea[13])
             else:
                 d[linea[1]]= {'ingresos': float(linea[11]), 'beneficios': float(linea[13])}
-    return d
+    
+    return render_template('paises.html', titulo= 'Global S.L', ventas=d)
