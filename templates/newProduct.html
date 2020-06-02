@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block titulo %} Alta de productos {% endblock %}
+
+{% block contenido %}
+    <h1>Alta de productos </h1>
+    <form class= "u-full-width" action="/altaProducto" method="post">
+        <label for="tipo_producto">Tipo de Producto:</label>
+        <input type= 'text' name='tipo_producto' id="tipo_producto"/>
+        <label for="precio_unitario">Precio U.:</label>
+        <input type="number" name= "precio_unitario" id="precio_unitario" step="0.01">
+        <label for="coste_unitario">Coste U.:</label>
+        <input type="number" name= "coste_unitario" id="coste_unitario" step="0.01"><br/>
+        <input type="submit"  value="Aceptar">
+
+    </form>
+{% endblock %}

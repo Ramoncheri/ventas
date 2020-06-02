@@ -1,0 +1,26 @@
+{% extends 'base.html' %}  #instruccion que dice que region es una extension de base.html
+
+{%block titulo%}
+Listado de productoss
+{% endblock%}
+
+{% block contenido %}
+    <h1>Lista de productos </h1>
+
+    <table>
+        <tr>
+            <th>Producto</th>
+            <th>Precio U.</th>
+            <th>Coste U.</th>
+        </tr>
+        {% for producto in productos %}
+        <tr>
+            <td class='producto'>{{producto[1]}}</td>
+            <td> {{producto[2]}}</td>
+            <td> {{producto[3]}}</td>
+        </tr>
+        {% endfor %}
+       
+    </table>
+    <a class= 'button button-primary' href="/">Volver</a>
+{% endblock %}
