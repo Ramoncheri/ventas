@@ -75,3 +75,36 @@ def altaProducto():
         else: 
             return render_template('newProduct.html', form= form)
 
+@app.route("/modificaproducto", methods= ["GET", "POST"])
+def modifica_producto():
+    if request.method== 'GET':
+        id_product= request.values['id']
+
+        conn=sqlite3.connect(app.config['BBDD'])
+        c=conn.cursor()
+        query= "SELECT id, tipo_producto, precio_unitario, coste_unitario FROM productos WHERE id = ?;"
+        c.execute(query, (id_product,))
+
+        fila= c.fetchone()
+        conn.close()
+        if fila:
+            form= ProductForm(data={'id': fila[0], 'tipo_producto': fila[1], 'precio_unitario': fila[2], 'coste_unitario': fila[3]})
+            form.submit.label.text= "Modificar"
+            return render_template('modifproduct.html', form=form)
+        else:
+            return redirect(url_for("productos"))
+
+    else:
+        form= ProductForm(request.form)
+        if form.validate():
+            conn=sqlite3.connect(app.config['BBDD'])
+            c=conn.cursor()
+            query= "UPDATE productos SET tipo_producto= ?, precio_unitario= ?, coste_unitario= ? WHERE id= ?;"
+            c.execute(query, (form.tipo_producto.data, form.precio_unitario.data, form.coste_unitario.data,form.id.data))
+            conn.commit()
+            conn.close()
+            return redirect(url_for("productos"))
+
+        else:
+            form.submit.label.text= "Modificar"
+            return render_template('modifproduct.html', form=form)

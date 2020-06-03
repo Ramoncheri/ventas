@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block titulo %} Detalle de productos {% endblock %}
+
+{% block contenido %}
+<h1>Detalle de producto</h1>
+<form action="/modificaproducto" clas="u-ful-width" method="post">
+
+    {{form.hidden_tag()}}
+    
+    {{form.tipo_producto.label}}
+    {% if form.tipo_producto.errors %}  <!--si hay errores, da True-->
+        {{ form.tipo_producto(class= "u-full-width error", placeholder= "Producto")}}
+        {% for error in form.tipo_producto.errors %}
+            <p class="error-msg">{{ error }}</p>  <!--imprime los errores en un parrafo especifico-->
+        {%endfor%}
+        {% else %}
+            {{ form.tipo_producto(class= "u-full-width", placeholder= "Producto")}}
+    {% endif %}
+
+    {{form.precio_unitario.label}}
+    {% if form.precio_unitario.errors %}  <!--si hay errores, da True-->
+        {{form.precio_unitario(class="u-full-width error", placeholder="Precio unitario")}}
+        {% for error in form.precio_unitario.errors %}
+            <p class="error-msg">{{ error }}</p>  <!--imprime los errores en un parrafo especifico-->
+        {%endfor%}
+
+    {% else %}
+        {{ form.precio_unitario(class= "u-full-width", placeholder= "Producto")}}
+    {% endif %}
+
+    {{form.coste_unitario.label}}
+    {% if form.coste_unitario.errors %}  <!--si hay errores, da True-->
+        {{form.coste_unitario(class="u-full-width error", placeholder= "Coste unitario")}}
+        {% for error in form.coste_unitario.errors %}
+            <p class="error-msg">{{ error }}</p>  <!--imprime los errores en un parrafo especifico-->
+        {%endfor%}
+
+    {% else %}
+        {{ form.coste_unitario(class= "u-full-width", placeholder= "Producto")}}
+    {% endif %}
+        
+    {{form.submit(class="button-primary")}}
+
+
+        
+</form>   
+{% endblock %}
