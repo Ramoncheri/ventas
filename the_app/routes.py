@@ -1,7 +1,8 @@
 from the_app import app
 from flask import render_template, request, redirect,url_for
 import csv, sqlite3
-from the_app.forms import ProductForm
+from the_app.forms import ProductForm, ModProductForm
+
 
 BBDD= './data/ventas.db'
 
@@ -88,23 +89,35 @@ def modifica_producto():
         fila= c.fetchone()
         conn.close()
         if fila:
-            form= ProductForm(data={'id': fila[0], 'tipo_producto': fila[1], 'precio_unitario': fila[2], 'coste_unitario': fila[3]})
-            form.submit.label.text= "Modificar"
+            form= ModProductForm(data={'id': fila[0], 'tipo_producto': fila[1], 'precio_unitario': fila[2], 'coste_unitario': fila[3]})
+            
             return render_template('modifproduct.html', form=form)
         else:
             return redirect(url_for("productos"))
 
     else:
-        form= ProductForm(request.form)
-        if form.validate():
-            conn=sqlite3.connect(app.config['BBDD'])
-            c=conn.cursor()
-            query= "UPDATE productos SET tipo_producto= ?, precio_unitario= ?, coste_unitario= ? WHERE id= ?;"
-            c.execute(query, (form.tipo_producto.data, form.precio_unitario.data, form.coste_unitario.data,form.id.data))
-            conn.commit()
-            conn.close()
-            return redirect(url_for("productos"))
-
+        form= ModProductForm(request.form)
+        
+        if request.form.get('modificar'):
+            if form.validate():
+                query= "UPDATE productos SET tipo_producto= ?, precio_unitario= ?, coste_unitario= ? WHERE id= ?;"
+                tupla_data= (form.tipo_producto.data, form.precio_unitario.data, form.coste_unitario.data, form.id.data)
+                
+            else:
+                return render_template('modifproduct.html', form=form)
+                
         else:
-            form.submit.label.text= "Modificar"
-            return render_template('modifproduct.html', form=form)
+            query= "DELETE FROM productos WHERE id= ?;"
+            tupla_data= (form.id.data,)
+
+        conn= sqlite3.connect(app.config['BBDD'])
+        c= conn.cursor()
+        try:
+            c.execute(query, tupla_data)
+            conn.commit()
+        except Exception as e:
+            print('MOD/DEL- Error de acceso a la base de datos: {}'.format(e))
+
+        conn.close()
+
+        return redirect(url_for('productos'))

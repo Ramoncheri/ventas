@@ -10,8 +10,8 @@ def valida_coste(form, field):
 class ProductForm(FlaskForm): #formulario para validar los datos. Solo hay que definir los datos y ponerle validadores
     id= HiddenField('id')
     tipo_producto = StringField('Tipo de producto', validators= [DataRequired(), Length(min=3, message="Debe tener al menos tres caracteres")])
-    precio_unitario= FloatField('Precio U.', validators= [DataRequired()])
-    coste_unitario= FloatField('Coste U.', validators=[DataRequired(), valida_coste])
+    precio_unitario= FloatField('Precio unitario', validators= [DataRequired()])
+    coste_unitario= FloatField('Coste unitario', validators=[DataRequired(), valida_coste])
 
     submit= SubmitField('Aceptar')
 
@@ -22,3 +22,12 @@ class ProductForm(FlaskForm): #formulario para validar los datos. Solo hay que d
         if field.data > self.precio_unitario.data:
             raise ValidationError(' El coste unitario debe ser menor o igual que el precio unitario')
 '''
+
+class ModProductForm(FlaskForm): #formulario para validar los datos. Solo hay que definir los datos y ponerle validadores
+    id= HiddenField('id')
+    tipo_producto = StringField('Tipo de producto', validators= [DataRequired(), Length(min=3, message="Debe tener al menos tres caracteres")])
+    precio_unitario= FloatField('Precio unitario', validators= [DataRequired()])
+    coste_unitario= FloatField('Coste unitario', validators=[DataRequired(), valida_coste])
+
+    modificar= SubmitField('Modificar')
+    borrar= SubmitField('Borrar')

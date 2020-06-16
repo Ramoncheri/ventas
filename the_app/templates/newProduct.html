@@ -7,6 +7,7 @@
     <form class= "u-full-width" action="/altaProducto" method="post">
         {{form.hidden_tag()}}
 
+        {{form.tipo_producto.label}}
         {% if form.tipo_producto.errors %}  <!--si hay errores, da True-->
             {{ form.tipo_producto(class= "u-full-width error", placeholder= "Producto")}}
             {% for error in form.tipo_producto.errors %}
@@ -16,6 +17,7 @@
             {{ form.tipo_producto(class= "u-full-width", placeholder= "Producto")}}
         {% endif %}
 
+        {{form.precio_unitario.label}}    
         {% if form.precio_unitario.errors %}  <!--si hay errores, da True-->
             {{form.precio_unitario(class="u-full-width error", placeholder="Precio unitario")}}
             {% for error in form.precio_unitario.errors %}
@@ -23,9 +25,10 @@
             {%endfor%}
 
         {% else %}
-            {{ form.precio_unitario(class= "u-full-width", placeholder= "Producto")}}
+            {{ form.precio_unitario(class= "u-full-width", placeholder= "Precio")}}
         {% endif %}
 
+        {{form.coste_unitario.label}}
         {% if form.coste_unitario.errors %}  <!--si hay errores, da True-->
             {{form.coste_unitario(class="u-full-width error", placeholder= "Coste unitario")}}
             {% for error in form.coste_unitario.errors %}
@@ -33,7 +36,7 @@
             {%endfor%}
 
         {% else %}
-            {{ form.coste_unitario(class= "u-full-width", placeholder= "Producto")}}
+            {{ form.coste_unitario(class= "u-full-width", placeholder= "Coste")}}
         {% endif %}
         
         {{form.submit(class="button-primary")}}
